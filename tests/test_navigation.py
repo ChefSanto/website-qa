@@ -8,7 +8,11 @@ def test_pandasail_navigation():
 
         page.goto("https://pandasail.com/")
 
-        services_link = page.get_by_role("link", name="Services")
+        desktop_menu = page.locator("#menu-1-da35919")
+
+        services_link = desktop_menu.get_by_role(
+            "link", name="Services"
+        )
 
         services_link.click()
 
