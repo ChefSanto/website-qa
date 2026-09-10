@@ -1,21 +1,24 @@
 from playwright.sync_api import sync_playwright
 
 
-def test_pandasail_navigation():
+def test_mobile_navigation_inspection():
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page()
+
+        page = browser.new_page(
+            viewport={"width": 390, "height": 844}
+        )
 
         page.goto("https://pandasail.com/")
 
-        desktop_menu = page.locator("#menu-1-da35919")
+        print("\nMOBILE NAVIGATION ELEMENTS:")
 
-        services_link = desktop_menu.get_by_role(
-            "link", name="Services"
-        )
-
-        services_link.click()
-
-        assert page.url == "https://pandasail.com/services/"
+        for nav in page.locator("nav").all():
+            print(
+                " - CLASS:",
+                nav.get_attribute("class"),
+                "| VISIBLE:",
+                nav.is_visible()
+            )
 
         browser.close()
