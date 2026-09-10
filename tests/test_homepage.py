@@ -1,8 +1,14 @@
-from playwright.sync_api import Page
+from playwright.sync_api import sync_playwright
 
 
-def test_pandasail_homepage(page: Page):
-    page.goto("https://pandasail.com/")
+def test_pandasail_homepage():
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
 
-    assert page.title() != ""
-    assert page.locator("body").is_visible()
+        page.goto("https://pandasail.com/")
+
+        assert page.title() != ""
+        assert page.locator("body").is_visible()
+
+        browser.close()
