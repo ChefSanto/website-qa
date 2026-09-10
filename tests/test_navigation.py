@@ -8,8 +8,10 @@ def test_pandasail_navigation():
 
         page.goto("https://pandasail.com/")
 
-        navigation = page.locator("nav").first
+        services_link = page.get_by_role("link", name="Services")
 
-        assert navigation.is_visible()
+        services_link.click()
+
+        assert page.url == "https://pandasail.com/services/"
 
         browser.close()
