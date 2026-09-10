@@ -8,8 +8,8 @@ def test_pandasail_navigation():
 
         page.goto("https://pandasail.com/")
 
-        # Check that the main navigation exists
-        navigation = page.locator("nav")
+        navigation = page.locator("nav").first
+
         assert navigation.is_visible()
 
         browser.close()
