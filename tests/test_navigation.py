@@ -8,14 +8,8 @@ def test_pandasail_navigation():
 
         page.goto("https://pandasail.com/")
 
-        print("\nPAGE TITLE:", page.title())
-        print("\nLINKS:")
-
-        for link in page.get_by_role("link").all():
-            text = link.inner_text().strip()
-            href = link.get_attribute("href")
-
-            if text or href:
-                print(f" - TEXT: {text!r} | HREF: {href!r}")
+        # Check that the main navigation exists
+        navigation = page.locator("nav")
+        assert navigation.is_visible()
 
         browser.close()
